@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Apollo Hospitals",
+    "location": { "type": "Point", "coordinates": [80.2518, 13.0604] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { "host": "smtp.gmail.com", "port": 465, "secure": true, "auth": { "user": "testotphospital@gmail.com", "pass": "rlqfmboctfcvpteu" } },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$JQ93eCAUnVxZAFyxdFKHX.jlS/eudLPjfQPOwnWA1jTJhZrVX8/SC"
+  },
+  {
+    "name": "MIOT International",
+    "location": { "type": "Point", "coordinates": [80.1692, 13.0111] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { "host": "smtp.gmail.com", "port": 465, "secure": true, "auth": { "user": "testotphospital@gmail.com", "pass": "rlqfmboctfcvpteu" } },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$JQ93eCAUnVxZAFyxdFKHX.jlS/eudLPjfQPOwnWA1jTJhZrVX8/SC"
+  }
+]

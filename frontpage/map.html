@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emergency Route</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+    }
+    #map {
+      height: 90vh;
+      width: 100vw;
+    }
+    #info {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 10px;
+      background: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+
+<div id="info">Loading shortest route...</div>
+<div id="map"></div>
+
+<script>
+  // ✅ Hospital coordinates list (lat, lng)
+  const hospitalLocations = {
+    "Rela Hospital": [12.960997, 80.145234],
+    "Apollo Hospitals": [13.0591, 80.2394],
+    "MIOT International": [13.0108, 80.1968],
+    "Fortis Malar Hospital": [13.0025, 80.2615],
+    "Sri Ramachandra Medical Centre": [13.0258, 80.1426],
+    "Global Hospitals": [12.9319, 80.2290],
+    "SIMS Hospital": [13.0484, 80.2104],
+    "Chennai National Hospital": [13.0795, 80.2738],
+    "Kauvery Hospital": [13.0330, 80.2435],
+    "Billroth Hospitals": [13.0823, 80.2226]
+  };
+
+  // ✅ Your OpenRouteService API key
+  const apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImRkYzg0ZjE4YjdmYjg1NDRmZmQxN2Y4NjcyYTgxNDE0NDk4N2FmNGIyZTY3MjdiMmE0NWNkYTEwIiwiaCI6Im11cm11cjY0In0=";  
+  const routeUrl = "https://api.openrouteservice.org/v2/directions/driving-car/geojson";
+
+  // ✅ Hospital name from sessionStorage
+  const hospitalName = sessionStorage.getItem("verifiedHospital");
+  const hospitalCoords = hospitalLocations[hospitalName];
+
+  if (!hospitalCoords) {
+    alert("❌ No hospital selected or invalid. Please go back and select again.");
+    document.getElementById("info").innerText = "❌ Hospital not selected.";
+    throw new Error("Hospital coordinates not found.");
+  }
+
+  // ✅ Initialize map with default view
+  const map = L.map('map').setView([13.05, 80.25], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  let userMarker;
+  let routeLine;
+
+  // ✅ Function to fetch and draw route
+  async function drawRoute(userCoords) {
+    if (routeLine) map.removeLayer(routeLine);
+
+    const body = {
+      coordinates: [
+        [userCoords[1], userCoords[0]], // lng, lat for ORS API
+        [hospitalCoords[1], hospitalCoords[0]]
+      ]
+    };
+
+    try {
+      const res = await fetch(routeUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": apiKey
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) throw new Error("Route fetch failed.");
+
+      const data = await res.json();
+      const routeCoords = data.features[0].geometry.coordinates.map(c => [c[1], c[0]]);
+      const summary = data.features[0].properties.summary;
+
+      const distanceKm = (summary.distance / 1000).toFixed(2);
+      const durationMin = (summary.duration / 60).toFixed(1);
+
+      routeLine = L.polyline(routeCoords, { color: "green", weight: 5 }).addTo(map);
+
+      document.getElementById("info").innerText =
+        `✅ Route to ${hospitalName} → Distance: ${distanceKm} km | Time: ${durationMin} min`;
+
+    } catch (error) {
+      console.error("❌ Route error:", error);
+      document.getElementById("info").innerText = "❌ Failed to load route. Check API key or location.";
+    }
+  }
+
+  // ✅ Get user current location
+  navigator.geolocation.getCurrentPosition(position => {
+    const userCoords = [position.coords.latitude, position.coords.longitude];
+
+    // User marker (draggable)
+    userMarker = L.marker(userCoords, { draggable: true })
+      .addTo(map)
+      .bindPopup("🚑 Your Location (drag to adjust)")
+      .openPopup();
+
+    // Hospital marker
+    L.marker(hospitalCoords)
+      .addTo(map)
+      .bindPopup("🏥 " + hospitalName);
+
+    // Fit map to show both markers
+    map.fitBounds(L.latLngBounds([userCoords, hospitalCoords]), { padding: [50, 50] });
+
+    // Draw initial route
+    drawRoute(userCoords);
+
+    // Recalculate route if user drags marker
+    userMarker.on('dragend', function (e) {
+      const pos = e.target.getLatLng();
+      drawRoute([pos.lat, pos.lng]);
+    });
+
+  }, error => {
+    alert("📍 Location access denied. Please enable GPS and use HTTPS/localhost.");
+    document.getElementById("info").innerText = "📍 GPS access required for route calculation.";
+  }, {
+    enableHighAccuracy: true,
+    timeout: 10000,
+    maximumAge: 0
+  });
+</script>
+
+</body>
+</html>
