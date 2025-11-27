@@ -35,7 +35,6 @@ const hospitalSchema = new mongoose.Schema({
   adminEmail: {
     type: String,
     required: true,
-    unique: true
   },
   adminPasswordHash: {
     type: String,

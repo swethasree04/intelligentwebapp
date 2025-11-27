@@ -3,16 +3,160 @@
     "name": "Apollo Hospitals",
     "location": { "type": "Point", "coordinates": [80.2518, 13.0604] },
     "emailFrom": "testotphospital@gmail.com",
-    "smtp": { "host": "smtp.gmail.com", "port": 465, "secure": true, "auth": { "user": "testotphospital@gmail.com", "pass": "rlqfmboctfcvpteu" } },
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
     "adminEmail": "testotp.hospital@gmail.com",
-    "adminPasswordHash": "$2b$10$JQ93eCAUnVxZAFyxdFKHX.jlS/eudLPjfQPOwnWA1jTJhZrVX8/SC"
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
   },
   {
     "name": "MIOT International",
     "location": { "type": "Point", "coordinates": [80.1692, 13.0111] },
     "emailFrom": "testotphospital@gmail.com",
-    "smtp": { "host": "smtp.gmail.com", "port": 465, "secure": true, "auth": { "user": "testotphospital@gmail.com", "pass": "rlqfmboctfcvpteu" } },
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
     "adminEmail": "testotp.hospital@gmail.com",
-    "adminPasswordHash": "$2b$10$JQ93eCAUnVxZAFyxdFKHX.jlS/eudLPjfQPOwnWA1jTJhZrVX8/SC"
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "Rela Hospital",
+    "location": { "type": "Point", "coordinates": [80.0493, 12.9487] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "Fortis Malar Hospital",
+    "location": { "type": "Point", "coordinates": [80.2572, 13.0111] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "Sri Ramachandra Medical Centre",
+    "location": { "type": "Point", "coordinates": [80.1850, 13.0406] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "Global Hospitals",
+    "location": { "type": "Point", "coordinates": [80.2528, 13.0185] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "SIMS Hospital",
+    "location": { "type": "Point", "coordinates": [80.2123, 13.0460] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "Chennai National Hospital",
+    "location": { "type": "Point", "coordinates": [80.2750, 13.0827] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "Kauvery Hospital",
+    "location": { "type": "Point", "coordinates": [80.2550, 13.0674] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
+  },
+  {
+    "name": "Billroth Hospitals",
+    "location": { "type": "Point", "coordinates": [80.2400, 13.0669] },
+    "emailFrom": "testotphospital@gmail.com",
+    "smtp": { 
+      "host": "smtp.gmail.com", 
+      "port": 465, 
+      "secure": true, 
+      "auth": { 
+        "user": "testotphospital@gmail.com", 
+        "pass": "rlqfmboctfcvpteu" 
+      } 
+    },
+    "adminEmail": "testotp.hospital@gmail.com",
+    "adminPasswordHash": "$2b$10$N4bCwuxao6N9JkC8gPqCxuH9TU.CnF8sSYHWlSBR61b0Kc5zq8Q7K"
   }
 ]

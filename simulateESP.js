@@ -13,7 +13,7 @@ const SIGNAL_LOCATIONS = [
 const DIRECTIONS = ["North","South","East","West"];
 let isProcessing = false;
 
-const SERVER_IP = "172.26.95.247"; // Your laptop IP
+const SERVER_IP = "10.251.156.247";
 const PORT = 5001;
 
 // Generate random vehicle number like TNAB1234

@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Hospital = require('./server/models/hospital.js'); // Adjust path if needed
+const bcrypt = require('bcryptjs');
+const Hospital = require('./server/models/Hospital');
 
-// ✅ Load environment variables
 dotenv.config();
 
-// ✅ Connect to MongoDB Atlas
+// Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// ✅ Common SMTP config
+// Common settings
+const adminEmail = "testotp.hospital@gmail.com";
+const adminPasswordPlain = "12345"; // your new password
+const adminPasswordHash = bcrypt.hashSync(adminPasswordPlain, 10);
+
 const smtpSettings = {
   host: 'smtp.gmail.com',
   port: 465,
@@ -21,71 +25,96 @@ const smtpSettings = {
   }
 };
 
-// ✅ Hospital data
+// Hospitals list
 const hospitalsData = [
   {
     name: 'Rela Hospital',
     location: { type: 'Point', coordinates: [80.2209, 13.0103] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'MIOT International',
     location: { type: 'Point', coordinates: [80.1692, 13.0111] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'Fortis Malar Hospital',
     location: { type: 'Point', coordinates: [80.2577, 13.0066] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'Sri Ramachandra Medical Centre',
     location: { type: 'Point', coordinates: [80.1490, 13.0340] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'Global Hospitals',
     location: { type: 'Point', coordinates: [80.2263, 12.9092] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'SIMS Hospital',
     location: { type: 'Point', coordinates: [80.2118, 13.0533] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'Chennai National Hospital',
     location: { type: 'Point', coordinates: [80.2752, 13.0794] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'Kauvery Hospital',
     location: { type: 'Point', coordinates: [80.2502, 13.0421] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   },
   {
     name: 'Billroth Hospitals',
     location: { type: 'Point', coordinates: [80.2371, 13.0799] },
     emailFrom: 'testotp.hospital@gmail.com',
-    smtp: smtpSettings
+    smtp: smtpSettings,
+    adminEmail,
+    adminPasswordHash,
   }
 ];
 
-// ✅ Insert into MongoDB
-Hospital.insertMany(hospitalsData)
-  .then(() => {
-    console.log('✅ Hospitals with location and SMTP added');
+// Insert hospitals
+async function seed() {
+  try {
+    await Hospital.deleteMany({});
+    console.log("🧹 Old hospital data cleared");
+
+    await Hospital.insertMany(hospitalsData);
+    console.log("✅ New hospitals added");
+
     mongoose.disconnect();
-  })
-  .catch((err) => {
-    console.error('❌ Error inserting hospitals:', err);
+  } catch (err) {
+    console.error("❌ Error inserting hospitals:", err);
     mongoose.disconnect();
-  });
+  }
+}
+
+seed();

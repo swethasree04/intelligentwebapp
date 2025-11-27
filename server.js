@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'frontpage/register_page.html')));
 // Environment
 // =========================
 const PORT = process.env.PORT || 5001;
-const SERVER_IP = "172.26.95.247"; // Your laptop IP
+const SERVER_IP = "10.251.156.247"; // Your laptop IP
 const BASE_URL = `http://${SERVER_IP}:${PORT}`;
 
 // =========================
