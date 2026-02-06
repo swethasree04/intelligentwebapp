@@ -31,10 +31,9 @@ app.use(express.static(path.join(__dirname, "frontpage")));
 // =========================
 const PORT = process.env.PORT || 5001;
 
-// internal vs public
+// URLs (local vs public)
 const LOCAL_URL = `http://localhost:${PORT}`;
-const PUBLIC_URL = "https://densest-vada-semipractical.ngrok-free.dev";
-
+const PUBLIC_URL = "https://intelligentwebapp-1.onrender.com";
 
 // =========================
 // MongoDB
@@ -58,6 +57,13 @@ function generateOtp() {
 }
 
 // =========================
+// ROOT HEALTH CHECK ✅
+// =========================
+app.get("/", (req, res) => {
+  res.send("🚑 Intelligent Emergency Web App Backend is running");
+});
+
+// =========================
 // OTP REQUEST
 // =========================
 app.post("/api/request-otp", async (req, res) => {
@@ -78,9 +84,9 @@ app.post("/api/request-otp", async (req, res) => {
       expires
     });
 
-    const qrLink = `http://localhost:${PORT}/api/start-qr?email=${encodeURIComponent(userEmail)}`;
-
-
+    const qrLink = `${PUBLIC_URL}/api/start-qr?email=${encodeURIComponent(
+      userEmail
+    )}`;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -208,7 +214,7 @@ app.post("/api/confirm-qr/:vehicle/:token", async (req, res) => {
 });
 
 // =========================
-// SSE (SAFE)
+// SSE
 // =========================
 app.get("/api/subscribe/:vehicle", (req, res) => {
   const { vehicle } = req.params;
@@ -219,7 +225,6 @@ app.get("/api/subscribe/:vehicle", (req, res) => {
     Connection: "keep-alive"
   });
 
-  // ✅ defensive init
   if (!vehicleSessions[vehicle]) {
     vehicleSessions[vehicle] = {
       listeners: [],
@@ -275,5 +280,5 @@ app.post("/api/clear-emergency", (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
   console.log("🚀 Server running");
   console.log("🔁 Local access :", LOCAL_URL);
-  console.log("📱 QR access   :", PUBLIC_URL);
+  console.log("🌐 Public URL  :", PUBLIC_URL);
 });
